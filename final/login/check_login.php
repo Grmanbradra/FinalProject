@@ -7,10 +7,10 @@ if ($_POST['username'] == "" || $_POST['password'] == "") {
     echo "Username AND PASSWORD Is Null";
 }
 try {
-    require_once('config.php');
+    require_once('../config/connectdb.php');
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $db = $pdo;
+    $db = $conn;
 
     $sql = 'SELECT * FROM user_login WHERE user_name=:username and user_pass=:password';
     $stmt = $db->prepare($sql);
@@ -26,10 +26,11 @@ try {
 
         exit();
     } else {
-        header("location:../index.php");
+        header("location:../index2.php");
         $_SESSION['user'] = [
             'name' => $per['user_name'],
-            'permission' => $per['user_status']
+            'permission' => $per['user_status'],
+            'email' => $per['user_email']
         ];
     }
 } catch (PDOException $ex) {

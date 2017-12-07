@@ -31,7 +31,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.php">เพิ่มไฟล์
+                    <a class="nav-link" href="index2.php">เพิ่มไฟล์
                         <!--<span class="sr-only">(current)</span>-->
                     </a>
                 </li>
