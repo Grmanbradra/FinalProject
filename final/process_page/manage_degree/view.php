@@ -2,7 +2,7 @@
 
 // read data
 try {
-    $stmt = $conn->prepare("SELECT * FROM categories_water WHERE water_id=:id");
+    $stmt = $conn->prepare("SELECT * FROM degree WHERE 	id_degree=:id");
     $stmt->bindValue(':id', $id);
     $stmt->execute();
 
@@ -14,20 +14,16 @@ try {
 $conn = null;
 ?>
 <div class="card">
-    <h3 class="card-title"><?=$data['water_name']?></h3>
+    <h3 class="card-title"><?=$data['name_degree']?></h3>
     <table class="table table-bordered">
         <tbody>
         <tr>
             <td width="250">id</td>
-            <td><?=$data['water_id'] ?></td>
+            <td><?=$data['id_degree'] ?></td>
         </tr>
         <tr>
-            <td width="250">ชื่อชนิด</td>
-            <td><?=$data['water_name'] ?></td>
-        </tr>
-        <tr>
-            <td width="250">ระดับค่ามาตารฐาน pH</td>
-            <td><?=$data['water_range'] ?></td>
+            <td width="250">ชื่อระดับ</td>
+            <td><?=$data['name_degree'] ?></td>
         </tr>
         </tbody>
     </table>

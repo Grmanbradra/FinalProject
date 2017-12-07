@@ -1,5 +1,5 @@
 <div class="card">
-    <h3 class="card-title">เพิ่มข้อมูลชนิดของน้ำ</h3>
+    <h3 class="card-title">เพิ่มหมวดหมู่หลัก</h3>
     <form action="<?= url('manage_main_cate.php?action=insert');?>" method="post">
         <table class="table table-bordered">
             <tbody>

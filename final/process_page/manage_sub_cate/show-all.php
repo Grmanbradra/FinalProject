@@ -17,12 +17,12 @@ $conn = null;
 
 ?>
 <div class="card">
-    <h3 class="card-title">คลังข้อมูล</h3>
+    <h3 class="card-title">หมวดหมู่ย่อย</h3>
     <div class="table-responsive">
         <table class="table table-hover table-bordered" id="sampleTable">
             <thead>
             <tr>
-                <th>#</th>
+                <th>หมายเลขหมวดหมู่ย่อย</th>
                 <th>ชื่อหมวดหมู่ย่อย</th>
                 <th>หมวดหมู่หลัก</th>
                 <th>action</th>

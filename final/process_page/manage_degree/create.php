@@ -1,25 +1,13 @@
 <div class="card">
-    <h3 class="card-title">เพิ่มข้อมูลชนิดของน้ำ</h3>
+    <h3 class="card-title">เพิ่มระดับ</h3>
     <form action="<?= url('manage_degree.php?action=insert');?>" method="post">
         <table class="table table-bordered">
             <tbody>
             <tr>
-                <td width="250">id</td>
+                <td width="250">ชื่อระดับ</td>
                 <td>
-                    <input type="text" name="water_id" style="width: 100%">
-                </td>
-            </tr>
-            <tr>
-                <td width="250">ชื่อชนิด</td>
-                <td>
-                    <input type="text" name="water_name" style="width: 100%">
+                    <input type="text" name="name_degree" style="width: 100%">
 
-                </td>
-            </tr>
-            <tr>
-                <td width="250">ระดับค่ามาตารฐาน pH</td>
-                <td>
-                    <input type="text" name="water_rang" style="width: 100%">
                 </td>
             </tr>
             </tbody>
