@@ -1,87 +1,84 @@
 <?php
-require_once 'login/config.php';
+    require_once __DIR__ . '/autoload.php';
+    if(isset($_SESSION['user']) && $_SESSION['user']['name'] != '') {
+        if($_SESSION['user']['permission'] == 1) {
+            header("Location: admin/index.php");
+        } else {
+            header("Location: index.php");
+        }
+    }
 ?>
+
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title> Manage Category System Automatically with Web API</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="css/portfolio-item.css" rel="stylesheet">
-    <link href="css/upload.css" rel="stylesheet">
-
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CSS-->
+    <link rel="stylesheet" type="text/css" href="vendor/vali-admin/css/main.css">
+    <!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Manage Categories System Automatically with Web API</title>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries-->
+    <!--if lt IE 9
+    script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
+    script(src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')
+    -->
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-        <a class="navbar-brand" href="#"> Manage Category System Automatically with Web API</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="index.php">เพิ่มไฟล์
-                        <!--<span class="sr-only">(current)</span>-->
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="box.php">คลังข้อมูล</a>
-                </li>
-            </ul>
-        </div>
+<section class="material-half-bg">
+    <div class="cover"></div>
+</section>
+<section class="login-content">
+    <div class="logo">
+        <h1>Manage Categories System Automatically with Web API</h1>
     </div>
-</nav>
-
-<center>
-    <form action="login/check_login.php" name="login" method="post">
-        <table>
-            <tr>
-                <td colspan="2" style="text-align: center">Sign in</td>
-                <td rowspan="3"><input type="submit" name="btnSignin" value="Sign in"/></td>
-            </tr>
-            <tr>
-                <td>Username:</td>
-                <td><input type="text" name="username"/></td>
-            </tr>
-            <tr>
-                <td>Password:</td>
-                <td><input type="password" name="password"/></td>
-            </tr>
-            <tr>
-                <td><a href="#" /><h4>Forget Password</h4> </td>
-                <td colspan="2" align="center"><a href="login/register.php" /><h4>Sign up</h4></td>
-            </tr>
-            <tr>
-
-            </tr>
-        </table>
-    </form>
-
-</center>
-
-<footer class="py-5 bg-dark">
-    <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
+    <div class="login-box">
+        <form class="login-form" action="login/check_login.php" method="post">
+            <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>SIGN IN</h3>
+            <div class="form-group">
+                <label class="control-label">USERNAME</label>
+                <input class="form-control" type="text" placeholder="Username" required autofocus name="username">
+            </div>
+            <div class="form-group">
+                <label class="control-label">PASSWORD</label>
+                <input class="form-control" type="password" placeholder="Password" required name="password">
+            </div>
+            <div class="form-group">
+                <div class="utility">
+                    <!-- stay signed in  -->
+<!--                    <div class="animated-checkbox">-->
+<!--                        <label class="semibold-text">-->
+<!--                            <input type="checkbox"><span class="label-text">Stay Signed in</span>-->
+<!--                        </label>-->
+<!--                    </div>-->
+                    <p class="semibold-text mb-0"><a data-toggle="flip">Forgot Password ?</a></p>
+                </div>
+            </div>
+            <div class="form-group btn-container">
+                <button type="submit" name="btn_submit" class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>SIGN IN</button>
+            </div>
+        </form>
+        <form class="forget-form" action="#">
+            <h3 class="login-head"><i class="fa fa-lg fa-fw fa-lock"></i>Forgot Password ?</h3>
+            <div class="form-group">
+                <label class="control-label">EMAIL</label>
+                <input class="form-control" type="text" placeholder="Email">
+            </div>
+            <div class="form-group btn-container">
+                <button class="btn btn-primary btn-block"><i class="fa fa-unlock fa-lg fa-fw"></i>RESET</button>
+            </div>
+            <div class="form-group mt-20">
+                <p class="semibold-text mb-0"><a data-toggle="flip"><i class="fa fa-angle-left fa-fw"></i> Back to Login</a></p>
+            </div>
+        </form>
     </div>
-    <!-- /.container -->
-</footer>
-
-<!-- Bootstrap core JavaScript -->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/popper/popper.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-
+</section>
 </body>
+<script src="vendor/vali-admin/js/jquery-2.1.4.min.js"></script>
+<script src="vendor/vali-admin/js/bootstrap.min.js"></script>
+<script src="vendor/vali-admin/js/plugins/pace.min.js"></script>
+<script src="vendor/vali-admin/js/main.js"></script>
 </html>
