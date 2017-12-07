@@ -4,11 +4,10 @@ if (isset($_POST['submit'])) {
 
 
     try {
-        $stmt = $conn->prepare("UPDATE categories_water SET water_id = :id, water_name = :name, water_range = :range WHERE water_id = :id_old");
+        $stmt = $conn->prepare("UPDATE key_degree SET keyword_degree = :keyword_degree, id_degree = :id_degree WHERE id_key_degree = :id_old");
         $stmt->bindValue(':id_old', $id);
-        $stmt->bindValue(':id', $_POST['water_id']);
-        $stmt->bindValue(':name', $_POST['water_name']);
-        $stmt->bindValue(':range', $_POST['water_rang']);
+        $stmt->bindValue(':keyword_degree', $_POST['keyword_degree']);
+        $stmt->bindValue(':id_degree', $_POST['id_degree']);
         if($stmt->execute()) {
             // success
             echo "<script>swal('Success!', 'Update record successfully', 'success')</script>";

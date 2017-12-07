@@ -3,10 +3,9 @@
 if (isset($_POST['submit'])) {
 
     try {
-        $stmt = $conn->prepare("INSERT INTO categories_water (water_id, water_name, water_range) VALUES (:id, :name, :range)");
-        $stmt->bindValue(':id', $_POST['water_id']);
-        $stmt->bindValue(':name', $_POST['water_name']);
-        $stmt->bindValue(':range', $_POST['water_rang']);
+        $stmt = $conn->prepare("INSERT INTO key_degree (keyword_degree, id_degree) VALUES (:keyword, :degree)");
+        $stmt->bindValue(':keyword', $_POST['keyword_degree']);
+        $stmt->bindValue(':degree', $_POST['id_degree']);
         if($stmt->execute()) {
             // success
             echo "<script>swal('Success!', 'New record created successfully', 'success')</script>";

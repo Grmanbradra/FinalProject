@@ -3,7 +3,7 @@
 try {
 
     // sql to delete a record
-    $sql = "DELETE FROM categories_water WHERE water_id=:id";
+    $sql = "DELETE FROM key_degree WHERE id_key_degree=:id";
     $stmt = $conn->prepare($sql);
     $stmt->bindValue(':id', $id);
 

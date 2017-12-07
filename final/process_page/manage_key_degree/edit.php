@@ -2,7 +2,8 @@
 
 // read data
 try {
-    $stmt = $conn->prepare("SELECT * FROM categories_water WHERE water_id=:id");
+    $stmt = $conn->prepare("SELECT * FROM key_degree
+                  JOIN degree ON degree.id_degree=key_degree.id_degree WHERE id_key_degree=:id");
     $stmt->bindValue(':id', $id);
     $stmt->execute();
 
@@ -11,30 +12,36 @@ try {
     echo "Error: " . $e->getMessage();
     $data = null;
 }
-$conn = null;
+
 ?>
 <div class="card">
-    <h3 class="card-title"><?=$data['water_name']?></h3>
-    <form action="<?= url('manage_key_degree.php?action=update&id='.$data['water_id']);?>" method="post">
+    <h3 class="card-title"><?=$data['keyword_degree']?></h3>
+    <form action="<?= url('manage_key_degree.php?action=update&id='.$data['id_key_degree']);?>" method="post">
         <table class="table table-bordered">
             <tbody>
             <tr>
-                <td width="250">id</td>
+                <td width="250">คีย์คำศัพท์</td>
                 <td>
-                    <input type="text" name="water_id" value="<?=$data['water_id'] ?>" style="width: 100%">
-                </td>
-            </tr>
-            <tr>
-                <td width="250">ชื่อชนิด</td>
-                <td>
-                    <input type="text" name="water_name" value="<?=$data['water_name'] ?>" style="width: 100%">
+                    <input type="text" name="keyword_degree" value="<?=$data['keyword_degree'] ?>" style="width: 100%">
 
                 </td>
             </tr>
             <tr>
-                <td width="250">ระดับค่ามาตารฐาน pH</td>
+                <td width="250">ระดับความเชี่ยวชาญ</td>
                 <td>
-                    <input type="text" name="water_rang" value="<?=$data['water_range'] ?>" style="width: 100%">
+                    <select name="id_degree" id="id_degree">
+                        <option value="">-- กรุณาใส่ข้อมูล --</option>
+                        <?php
+                        $sql = "select * from degree";
+                        $stmt = $conn->prepare($sql);
+                        $stmt->execute();
+                        $main = $stmt->fetchAll();
+                        foreach($main as $value) {
+                            echo '<option value="'.$value['id_degree'].'"  '.($value["id_degree"] == $data["id_degree"] ? 'selected' : '').'>'
+                                .$value['id_degree'] .' - '.$value['name_degree'] .'</option>';
+                        }
+                        ?>
+                    </select>
                 </td>
             </tr>
             </tbody>
@@ -46,3 +53,4 @@ $conn = null;
     <a href="<?= url('manage_key_degree.php');?>" class="btn btn-success">ย้อนกลับ</a>
 </div>
 
+<?php $conn = null; ?>
