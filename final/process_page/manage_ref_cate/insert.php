@@ -3,10 +3,10 @@
 if (isset($_POST['submit'])) {
 
     try {
-        $stmt = $conn->prepare("INSERT INTO categories_water (water_id, water_name, water_range) VALUES (:id, :name, :range)");
-        $stmt->bindValue(':id', $_POST['water_id']);
-        $stmt->bindValue(':name', $_POST['water_name']);
-        $stmt->bindValue(':range', $_POST['water_rang']);
+        $stmt = $conn->prepare("INSERT INTO ref_category (digit_main, digit_sub, id_key) VALUES (:digit_main, :digit_sub, :id_key)");
+        $stmt->bindValue(':digit_main', $_POST['main_category']);
+        $stmt->bindValue(':digit_sub', $_POST['sub_category']);
+        $stmt->bindValue(':id_key', $_POST['key_category']);
         if($stmt->execute()) {
             // success
             echo "<script>swal('Success!', 'New record created successfully', 'success')</script>";

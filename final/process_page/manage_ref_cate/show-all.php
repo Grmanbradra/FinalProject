@@ -1,13 +1,12 @@
 <?php
 // read data
 try {
-    $sql = "SELECT f.name_file, f.author_file, f.year_file, main.name_main, sub.name_sub, deg.name_degree
-            FROM file_data AS f 
-            JOIN ref_file ref ON f.id_file=ref.id_file
-            JOIN degree deg ON ref.id_degree=deg.id_degree
-            JOIN ref_category rec ON ref.id_ref_cate=rec.id_ref_cate
-            JOIN main_category main ON main.digit_main=rec.digit_main
-            JOIN sub_category sub ON sub.digit_sub=rec.digit_sub";
+    $sql = "SELECT rc.id_ref_cate, mc.name_main, sc.name_sub, category.keyword
+            FROM ref_category AS rc
+            JOIN main_category mc ON rc.digit_main = mc.digit_main
+            JOIN sub_category sc ON rc.digit_sub = sc.digit_sub
+            JOIN key_category category ON rc.id_key = category.id_key
+";
 
     $stmt = $conn->prepare($sql);
     $stmt->execute();
@@ -21,17 +20,15 @@ $conn = null;
 
 ?>
 <div class="card">
-    <h3 class="card-title">คลังข้อมูล</h3>
+    <h3 class="card-title">ความสัมพันธ์ของข้อมูล</h3>
     <div class="table-responsive">
         <table class="table table-hover table-bordered" id="sampleTable">
             <thead>
             <tr>
-                <th>ชื่อไฟล์</th>
-                <th>ชื่อผู้แต่ง</th>
-                <th>ปีที่พิมพ์</th>
-                <th>หมวดหลัก</th>
-                <th>หมวดรอง</th>
-                <th>ระดับ</th>
+                <th>ID</th>
+                <th>คีย์คำศัพท์</th>
+                <th>หมวดหมู่หลัก</th>
+                <th>หมวดหมู่ย่อย</th>
                 <th>action</th>
             </tr>
             </thead>
@@ -40,21 +37,19 @@ $conn = null;
             foreach ($data as $val) {
                 ?>
                 <tr>
-                    <td><?=$val['name_file'] ?></td>
-                    <td><?=$val['author_file'] ?></td>
-                    <td><?=$val['year_file'] ?></td>
+                    <td><?=$val['id_ref_cate'] ?></td>
+                    <td><?=$val['keyword'] ?></td>
                     <td><?=$val['name_main'] ?></td>
                     <td><?=$val['name_sub'] ?></td>
-                    <td><?=$val['name_degree'] ?></td>
                     <td>
                         <a class="btn btn-info"
-                           href="<?= url('manage_ref_cate.php?action=view&id=' . $val['water_id']) ?>"><i
+                           href="<?= url('manage_ref_cate.php?action=view&id=' . $val['id_ref_cate']) ?>"><i
                                 class="fa fa-eye" aria-hidden="true"></i></a>
                         <a class="btn btn-warning"
-                           href="<?= url('manage_ref_cate.php?action=edit&id=' . $val['water_id']) ?>"><i
+                           href="<?= url('manage_ref_cate.php?action=edit&id=' . $val['id_ref_cate']) ?>"><i
                                 class="fa fa-edit" aria-hidden="true"></i></a>
                         <a class="btn btn-danger" onclick="confirmDelete(this, event)"
-                           href="<?= url('manage_ref_cate.php?action=delete&id=' . $val['water_id']) ?>"><i
+                           href="<?= url('manage_ref_cate.php?action=delete&id=' . $val['id_ref_cate']) ?>"><i
                                 class="fa fa-remove" aria-hidden="true"></i></a>
                     </td>
                 </tr>
