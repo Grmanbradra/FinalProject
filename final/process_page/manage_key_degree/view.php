@@ -2,7 +2,9 @@
 
 // read data
 try {
-    $stmt = $conn->prepare("SELECT * FROM categories_water WHERE water_id=:id");
+    $stmt = $conn->prepare("SELECT * FROM key_degree
+                    JOIN degree d ON key_degree.id_degree = d.id_degree
+                    WHERE id_key_degree=:id");
     $stmt->bindValue(':id', $id);
     $stmt->execute();
 
@@ -14,20 +16,24 @@ try {
 $conn = null;
 ?>
 <div class="card">
-    <h3 class="card-title"><?=$data['water_name']?></h3>
+    <h3 class="card-title"><?=$data['keyword_degree']?></h3>
     <table class="table table-bordered">
         <tbody>
         <tr>
-            <td width="250">id</td>
-            <td><?=$data['water_id'] ?></td>
+            <td width="250">ID - คำที่บอกระดับ</td>
+            <td><?=$data['id_key_degree'] ?></td>
         </tr>
         <tr>
-            <td width="250">ชื่อชนิด</td>
-            <td><?=$data['water_name'] ?></td>
+            <td width="250">คำที่บอกระดับ</td>
+            <td><?=$data['keyword_degree'] ?></td>
         </tr>
         <tr>
-            <td width="250">ระดับค่ามาตารฐาน pH</td>
-            <td><?=$data['water_range'] ?></td>
+            <td width="250">ID - ระดับความเชี่ยวชาญ</td>
+            <td><?=$data['id_degree'] ?></td>
+        </tr>
+        <tr>
+            <td width="250">ระดับความเชี่ยวชาญ</td>
+            <td><?=$data['name_degree'] ?></td>
         </tr>
         </tbody>
     </table>

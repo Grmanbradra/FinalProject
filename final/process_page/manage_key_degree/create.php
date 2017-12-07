@@ -1,25 +1,31 @@
 <div class="card">
-    <h3 class="card-title">เพิ่มข้อมูลชนิดของน้ำ</h3>
+    <h3 class="card-title">เพิ่มข้อมูลคีย์ระดับ</h3>
     <form action="<?= url('manage_key_degree.php?action=insert');?>" method="post">
         <table class="table table-bordered">
             <tbody>
             <tr>
-                <td width="250">id</td>
+                <td width="250">คีย์คำศัพท์</td>
                 <td>
-                    <input type="text" name="water_id" style="width: 100%">
-                </td>
-            </tr>
-            <tr>
-                <td width="250">ชื่อชนิด</td>
-                <td>
-                    <input type="text" name="water_name" style="width: 100%">
+                    <input type="text" name="keyword_degree" style="width: 100%">
 
                 </td>
             </tr>
             <tr>
-                <td width="250">ระดับค่ามาตารฐาน pH</td>
+                <td width="250">ระดับความเชี่ยวชาญ</td>
                 <td>
-                    <input type="text" name="water_rang" style="width: 100%">
+                    <select name="id_degree" id="id_degree">
+                        <option value="">-- กรุณาใส่ข้อมูล --</option>
+                        <?php
+                        $sql = "select * from degree";
+                        $stmt = $conn->prepare($sql);
+                        $stmt->execute();
+                        $main = $stmt->fetchAll();
+                        foreach($main as $value) {
+                            echo '<option value="'.$value['id_degree'].'">'
+                                .$value['id_degree'] .' - '.$value['name_degree'] .'</option>';
+                        }
+                        ?>
+                    </select>
                 </td>
             </tr>
             </tbody>
