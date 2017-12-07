@@ -28,6 +28,7 @@ try {
     } else {
         header("location:../index.php");
         $_SESSION['user'] = [
+            'id' => $per['user_id'],
             'name' => $per['user_name'],
             'permission' => $per['user_status'],
             'email' => $per['user_email']

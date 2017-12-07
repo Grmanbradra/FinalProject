@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="main-login main-center">
-            <form method="post" action="add_user.php">
+            <form class="form-horizontal" method="post" action="add_user.php">
 
                 <div class="form-group">
                     <label for="name" class="cols-sm-2 control-label">Your Username *</label>

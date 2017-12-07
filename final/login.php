@@ -55,6 +55,7 @@
 <!--                        </label>-->
 <!--                    </div>-->
                     <p class="semibold-text mb-0"><a data-toggle="flip">Forgot Password ?</a></p>
+                    <p class="semibold-text mb-0"><a href="login/register.php">Sing Up</a></p>
                 </div>
             </div>
             <div class="form-group btn-container">

@@ -17,7 +17,7 @@ if ($_POST){
 						   user_email,user_phone,user_status,
 						   user_gender)
 					       VALUES(:user_name,:user_pass,:user_email,:user_phone,:user_status,:user_gender)";
-        $db = $pdo;
+        $db = $conn;
         $stmt = $db->prepare($sql);
 //                $stmt->bindParam(':id', "");
         $stmt->bindParam(':user_name', $username);
