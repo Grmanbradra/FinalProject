@@ -2,7 +2,7 @@
 
 // read data
 try {
-    $stmt = $conn->prepare("SELECT * FROM categories_water WHERE water_id=:id");
+    $stmt = $conn->prepare("SELECT * FROM sub_category WHERE digit_sub=:id");
     $stmt->bindValue(':id', $id);
     $stmt->execute();
 
@@ -11,30 +11,36 @@ try {
     echo "Error: " . $e->getMessage();
     $data = null;
 }
-$conn = null;
+
 ?>
 <div class="card">
-    <h3 class="card-title"><?=$data['water_name']?></h3>
-    <form action="<?= url('manage_sub_cate.php?action=update&id='.$data['water_id']);?>" method="post">
+    <h3 class="card-title"><?=$data['name_sub']?></h3>
+    <form action="<?= url('manage_sub_cate.php?action=update&id='.$data['digit_sub']);?>" method="post">
         <table class="table table-bordered">
             <tbody>
             <tr>
-                <td width="250">id</td>
+                <td width="250">ชื่อหมวดหมู่ย่อย</td>
                 <td>
-                    <input type="text" name="water_id" value="<?=$data['water_id'] ?>" style="width: 100%">
-                </td>
-            </tr>
-            <tr>
-                <td width="250">ชื่อชนิด</td>
-                <td>
-                    <input type="text" name="water_name" value="<?=$data['water_name'] ?>" style="width: 100%">
+                    <input type="text" name="name_sub" value="<?=$data['name_sub'] ?>" style="width: 100%">
 
                 </td>
             </tr>
             <tr>
-                <td width="250">ระดับค่ามาตารฐาน pH</td>
+                <td width="250">หมวดหมู่หลัก</td>
                 <td>
-                    <input type="text" name="water_rang" value="<?=$data['water_range'] ?>" style="width: 100%">
+                    <select name="digit_main" id="digit_main">
+                        <option value="">-- กรุณาใส่ข้อมูล --</option>
+                        <?php
+                            $sql = "select * from main_category";
+                            $stmt = $conn->prepare($sql);
+                            $stmt->execute();
+                            $main = $stmt->fetchAll();
+                            foreach($main as $value) {
+                                echo '<option value="'.$value['digit_main'].'" '.($value["digit_main"] == $data["digit_main"] ? 'selected' : '').'>'
+                                    .$value['digit_main'] .' - '.$value['name_main'] .'</option>';
+                            }
+                        ?>
+                    </select>
                 </td>
             </tr>
             </tbody>
@@ -46,3 +52,4 @@ $conn = null;
     <a href="<?= url('manage_sub_cate.php');?>" class="btn btn-success">ย้อนกลับ</a>
 </div>
 
+<?php $conn = null; ?>
