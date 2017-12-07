@@ -4,22 +4,28 @@
         <table class="table table-bordered">
             <tbody>
             <tr>
-                <td width="250">id</td>
+                <td width="250">ชื่อหมวดหมู่ย่อย</td>
                 <td>
-                    <input type="text" name="water_id" style="width: 100%">
-                </td>
-            </tr>
-            <tr>
-                <td width="250">ชื่อชนิด</td>
-                <td>
-                    <input type="text" name="water_name" style="width: 100%">
+                    <input type="text" name="name_sub" style="width: 100%">
 
                 </td>
             </tr>
             <tr>
-                <td width="250">ระดับค่ามาตารฐาน pH</td>
+                <td width="250">หมวดหมู่หลัก</td>
                 <td>
-                    <input type="text" name="water_rang" style="width: 100%">
+                    <select name="digit_main" id="digit_main">
+                        <option value="">-- กรุณาใส่ข้อมูล --</option>
+                        <?php
+                        $sql = "select * from main_category";
+                        $stmt = $conn->prepare($sql);
+                        $stmt->execute();
+                        $main = $stmt->fetchAll();
+                        foreach($main as $value) {
+                            echo '<option value="'.$value['digit_main'].'">'
+                                .$value['digit_main'] .' - '.$value['name_main'] .'</option>';
+                        }
+                        ?>
+                    </select>
                 </td>
             </tr>
             </tbody>

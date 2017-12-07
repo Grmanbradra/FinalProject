@@ -1,13 +1,9 @@
 <?php
 // read data
 try {
-    $sql = "SELECT f.name_file, f.author_file, f.year_file, main.name_main, sub.name_sub, deg.name_degree
-            FROM file_data AS f 
-            JOIN ref_file ref ON f.id_file=ref.id_file
-            JOIN degree deg ON ref.id_degree=deg.id_degree
-            JOIN ref_category rec ON ref.id_ref_cate=rec.id_ref_cate
-            JOIN main_category main ON main.digit_main=rec.digit_main
-            JOIN sub_category sub ON sub.digit_sub=rec.digit_sub";
+    $sql = "SELECT *
+            FROM sub_category AS sub
+            JOIN main_category AS main ON sub.digit_main=main.digit_main";
 
     $stmt = $conn->prepare($sql);
     $stmt->execute();
@@ -26,12 +22,9 @@ $conn = null;
         <table class="table table-hover table-bordered" id="sampleTable">
             <thead>
             <tr>
-                <th>ชื่อไฟล์</th>
-                <th>ชื่อผู้แต่ง</th>
-                <th>ปีที่พิมพ์</th>
-                <th>หมวดหลัก</th>
-                <th>หมวดรอง</th>
-                <th>ระดับ</th>
+                <th>#</th>
+                <th>ชื่อหมวดหมู่ย่อย</th>
+                <th>หมวดหมู่หลัก</th>
                 <th>action</th>
             </tr>
             </thead>
@@ -40,21 +33,18 @@ $conn = null;
             foreach ($data as $val) {
                 ?>
                 <tr>
-                    <td><?=$val['name_file'] ?></td>
-                    <td><?=$val['author_file'] ?></td>
-                    <td><?=$val['year_file'] ?></td>
-                    <td><?=$val['name_main'] ?></td>
+                    <td><?=$val['digit_sub'] ?></td>
                     <td><?=$val['name_sub'] ?></td>
-                    <td><?=$val['name_degree'] ?></td>
+                    <td><?=$val['digit_main'] ?> - <?=$val['name_main'] ?></td>
                     <td>
                         <a class="btn btn-info"
-                           href="<?= url('manage_sub_cate.php?action=view&id=' . $val['water_id']) ?>"><i
+                           href="<?= url('manage_sub_cate.php?action=view&id=' . $val['digit_sub']) ?>"><i
                                 class="fa fa-eye" aria-hidden="true"></i></a>
                         <a class="btn btn-warning"
-                           href="<?= url('manage_sub_cate.php?action=edit&id=' . $val['water_id']) ?>"><i
+                           href="<?= url('manage_sub_cate.php?action=edit&id=' . $val['digit_sub']) ?>"><i
                                 class="fa fa-edit" aria-hidden="true"></i></a>
                         <a class="btn btn-danger" onclick="confirmDelete(this, event)"
-                           href="<?= url('manage_sub_cate.php?action=delete&id=' . $val['water_id']) ?>"><i
+                           href="<?= url('manage_sub_cate.php?action=delete&id=' . $val['digit_sub']) ?>"><i
                                 class="fa fa-remove" aria-hidden="true"></i></a>
                     </td>
                 </tr>
