@@ -15,7 +15,7 @@ $conn = null;
 
 ?>
 <div class="card">
-    <h3 class="card-title">คลังข้อมูล</h3>
+    <h3 class="card-title">หมวดหมู่หลัก</h3>
     <div class="table-responsive">
         <table class="table table-hover table-bordered" id="sampleTable">
             <thead>
