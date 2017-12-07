@@ -3,10 +3,8 @@
 if (isset($_POST['submit'])) {
 
     try {
-        $stmt = $conn->prepare("INSERT INTO categories_water (water_id, water_name, water_range) VALUES (:id, :name, :range)");
-        $stmt->bindValue(':id', $_POST['water_id']);
-        $stmt->bindValue(':name', $_POST['water_name']);
-        $stmt->bindValue(':range', $_POST['water_rang']);
+        $stmt = $conn->prepare("INSERT INTO key_category (keyword) VALUES (:name)");
+        $stmt->bindValue(':name', $_POST['keyword']);
         if($stmt->execute()) {
             // success
             echo "<script>swal('Success!', 'New record created successfully', 'success')</script>";
@@ -26,5 +24,5 @@ if (isset($_POST['submit'])) {
 
     $conn = null;
 
-    echo '<script>setTimeout(function(){window.location.href = "manage_user.php"}, 1000)</script>';
+    echo '<script>setTimeout(function(){window.location.href = "manage_keyword.php"}, 1000)</script>';
 }

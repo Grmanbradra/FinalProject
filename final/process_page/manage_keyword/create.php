@@ -1,25 +1,13 @@
 <div class="card">
-    <h3 class="card-title">เพิ่มข้อมูลชนิดของน้ำ</h3>
-    <form action="<?= url('manage_user.php?action=insert');?>" method="post">
+    <h3 class="card-title">เพิ่มคำศัพท์</h3>
+    <form action="<?= url('manage_keyword.php?action=insert');?>" method="post">
         <table class="table table-bordered">
             <tbody>
             <tr>
-                <td width="250">id</td>
+                <td width="250">คำศัพท์</td>
                 <td>
-                    <input type="text" name="water_id" style="width: 100%">
-                </td>
-            </tr>
-            <tr>
-                <td width="250">ชื่อชนิด</td>
-                <td>
-                    <input type="text" name="water_name" style="width: 100%">
+                    <input type="text" name="keyword" style="width: 100%">
 
-                </td>
-            </tr>
-            <tr>
-                <td width="250">ระดับค่ามาตารฐาน pH</td>
-                <td>
-                    <input type="text" name="water_rang" style="width: 100%">
                 </td>
             </tr>
             </tbody>
@@ -28,6 +16,6 @@
     </form>
     <br>
 
-    <a href="<?= url('manage_user.php');?>" class="btn btn-success">ย้อนกลับ</a>
+    <a href="<?= url('manage_keyword.php');?>" class="btn btn-success">ย้อนกลับ</a>
 </div>
 
