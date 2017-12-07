@@ -2,7 +2,7 @@
 
 // read data
 try {
-    $stmt = $conn->prepare("SELECT * FROM categories_water WHERE water_id=:id");
+    $stmt = $conn->prepare("SELECT * FROM main_category WHERE digit_main=:id");
     $stmt->bindValue(':id', $id);
     $stmt->execute();
 
@@ -14,27 +14,21 @@ try {
 $conn = null;
 ?>
 <div class="card">
-    <h3 class="card-title"><?=$data['water_name']?></h3>
-    <form action="<?= url('manage_main_cate.php?action=update&id='.$data['water_id']);?>" method="post">
+    <h3 class="card-title"><?=$data['name_main']?></h3>
+    <form action="<?= url('manage_main_cate.php?action=update&id='.$data['digit_main']);?>" method="post">
         <table class="table table-bordered">
             <tbody>
             <tr>
                 <td width="250">id</td>
                 <td>
-                    <input type="text" name="water_id" value="<?=$data['water_id'] ?>" style="width: 100%">
+                    <input type="text" name="digit_main" disabled value="<?=$data['digit_main'] ?>" style="width: 100%">
                 </td>
             </tr>
             <tr>
-                <td width="250">ชื่อชนิด</td>
+                <td width="250">ชื่อหมวดหลัก</td>
                 <td>
-                    <input type="text" name="water_name" value="<?=$data['water_name'] ?>" style="width: 100%">
+                    <input type="text" name="name_main" value="<?=$data['name_main'] ?>" style="width: 100%">
 
-                </td>
-            </tr>
-            <tr>
-                <td width="250">ระดับค่ามาตารฐาน pH</td>
-                <td>
-                    <input type="text" name="water_rang" value="<?=$data['water_range'] ?>" style="width: 100%">
                 </td>
             </tr>
             </tbody>

@@ -16,7 +16,7 @@ require_once __DIR__ . '/autoload_admin.php';
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <title><?=$txt['manage_main_cate']['sub_menu'][2]?> | <?=$txt['web_name'] ?></title>
+    <title><?=$txt['menu_admin']['sub_menu'][2]?> | <?=$txt['web_name'] ?></title>
 
     <link rel="stylesheet" type="text/css" href="vendor/sweetalert2/css/sweetalert2.min.css">
     <script src="vendor/sweetalert2/js/sweetalert2.min.js"></script>
@@ -37,14 +37,14 @@ require_once __DIR__ . '/autoload_admin.php';
     <div class="content-wrapper">
         <div class="page-title">
             <div>
-                <h1><i class="fa fa-dashboard"></i> <?=$txt['manage_main_cate']['sub_menu'][2]?> </h1>
-                <p><?=$txt['manage_main_cate']['name']?> </p>
+                <h1><i class="fa fa-dashboard"></i> <?=$txt['menu_admin']['sub_menu'][2]?> </h1>
+                <p><?=$txt['menu_admin']['name']?> </p>
             </div>
             <div>
                 <ul class="breadcrumb">
                     <li><i class="fa fa-home fa-lg"></i></li>
-                    <li><?=$txt['manage_main_cate']['name']?> </li>
-                    <li><a href="<?=url('manage_main_cate.php') ?>"><?=$txt['manage_main_cate']['sub_menu'][2]?> </a></li>
+                    <li><?=$txt['menu_admin']['name']?> </li>
+                    <li><a href="<?=url('menu_admin.php') ?>"><?=$txt['menu_admin']['sub_menu'][2]?> </a></li>
                 </ul>
             </div>
         </div>

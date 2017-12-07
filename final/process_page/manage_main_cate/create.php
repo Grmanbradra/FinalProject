@@ -4,22 +4,10 @@
         <table class="table table-bordered">
             <tbody>
             <tr>
-                <td width="250">id</td>
+                <td width="250">ชื่อหมวดหลัก</td>
                 <td>
-                    <input type="text" name="water_id" style="width: 100%">
-                </td>
-            </tr>
-            <tr>
-                <td width="250">ชื่อชนิด</td>
-                <td>
-                    <input type="text" name="water_name" style="width: 100%">
+                    <input type="text" name="name_main" style="width: 100%">
 
-                </td>
-            </tr>
-            <tr>
-                <td width="250">ระดับค่ามาตารฐาน pH</td>
-                <td>
-                    <input type="text" name="water_rang" style="width: 100%">
                 </td>
             </tr>
             </tbody>
