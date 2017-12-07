@@ -26,7 +26,7 @@ try {
 
         exit();
     } else {
-        header("location:../index2.php");
+        header("location:../index.php");
         $_SESSION['user'] = [
             'name' => $per['user_name'],
             'permission' => $per['user_status'],

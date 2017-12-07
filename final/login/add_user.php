@@ -1,6 +1,6 @@
 <?php
 // Include config file
-require_once 'config.php';
+require_once '../config/connectdb.php';
 
 if ($_POST){
     $username = $_POST["username"];
