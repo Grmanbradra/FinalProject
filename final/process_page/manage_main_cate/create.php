@@ -1,6 +1,6 @@
 <div class="card">
     <h3 class="card-title">เพิ่มข้อมูลชนิดของน้ำ</h3>
-    <form action="<?= url('folders.php?action=insert');?>" method="post">
+    <form action="<?= url('manage_main_cate.php?action=insert');?>" method="post">
         <table class="table table-bordered">
             <tbody>
             <tr>
@@ -28,6 +28,6 @@
     </form>
     <br>
 
-    <a href="<?= url('folders.php');?>" class="btn btn-success">ย้อนกลับ</a>
+    <a href="<?= url('manage_main_cate.php');?>" class="btn btn-success">ย้อนกลับ</a>
 </div>
 

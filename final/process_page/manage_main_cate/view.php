@@ -33,6 +33,6 @@ $conn = null;
     </table>
     <br>
 
-    <a href="<?= url('folders.php');?>" class="btn btn-success">ย้อนกลับ</a>
+    <a href="<?= url('manage_main_cate.php');?>" class="btn btn-success">ย้อนกลับ</a>
 </div>
 

@@ -48,13 +48,13 @@ $conn = null;
                     <td><?=$val['name_degree'] ?></td>
                     <td>
                         <a class="btn btn-info"
-                           href="<?= url('folders.php?action=view&id=' . $val['water_id']) ?>"><i
+                           href="<?= url('manage_main_cate.php?action=view&id=' . $val['water_id']) ?>"><i
                                 class="fa fa-eye" aria-hidden="true"></i></a>
                         <a class="btn btn-warning"
-                           href="<?= url('folders.php?action=edit&id=' . $val['water_id']) ?>"><i
+                           href="<?= url('manage_main_cate.php?action=edit&id=' . $val['water_id']) ?>"><i
                                 class="fa fa-edit" aria-hidden="true"></i></a>
                         <a class="btn btn-danger" onclick="confirmDelete(this, event)"
-                           href="<?= url('folders.php?action=delete&id=' . $val['water_id']) ?>"><i
+                           href="<?= url('manage_main_cate.php?action=delete&id=' . $val['water_id']) ?>"><i
                                 class="fa fa-remove" aria-hidden="true"></i></a>
                     </td>
                 </tr>

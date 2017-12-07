@@ -16,7 +16,7 @@ require_once __DIR__ . '/autoload_admin.php';
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <title><?=$txt['menu_user']['sub_menu'][2]?> | <?=$txt['web_name'] ?></title>
+    <title><?=$txt['manage_main_cate']['sub_menu'][2]?> | <?=$txt['web_name'] ?></title>
 
     <link rel="stylesheet" type="text/css" href="vendor/sweetalert2/css/sweetalert2.min.css">
     <script src="vendor/sweetalert2/js/sweetalert2.min.js"></script>
@@ -37,21 +37,21 @@ require_once __DIR__ . '/autoload_admin.php';
     <div class="content-wrapper">
         <div class="page-title">
             <div>
-                <h1><i class="fa fa-dashboard"></i> <?=$txt['menu_user']['sub_menu'][2]?> </h1>
-                <p><?=$txt['menu_user']['name']?> </p>
+                <h1><i class="fa fa-dashboard"></i> <?=$txt['manage_main_cate']['sub_menu'][2]?> </h1>
+                <p><?=$txt['manage_main_cate']['name']?> </p>
             </div>
             <div>
                 <ul class="breadcrumb">
                     <li><i class="fa fa-home fa-lg"></i></li>
-                    <li><?=$txt['menu_user']['name']?> </li>
-                    <li><a href="<?=url('folders.php') ?>"><?=$txt['menu_user']['sub_menu'][2]?> </a></li>
+                    <li><?=$txt['manage_main_cate']['name']?> </li>
+                    <li><a href="<?=url('manage_main_cate.php') ?>"><?=$txt['manage_main_cate']['sub_menu'][2]?> </a></li>
                 </ul>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="text-right">
-                    <a class="btn btn-primary btn-lg" href="<?=url('folders.php?action=create') ?>">เพิ่มข้อมูล</a>
+                    <a class="btn btn-primary btn-lg" href="<?=url('manage_main_cate.php?action=create') ?>">เพิ่มข้อมูล</a>
                     <br>
                     <br>
                 </div>
@@ -62,32 +62,32 @@ require_once __DIR__ . '/autoload_admin.php';
                     $id = isset($_GET['id']) ? $_GET['id'] : null;
                     if ($_GET['action'] == 'view') {
                         // id
-                        include_once __DIR__ . '/process_page/folders/view.php';
+                        include_once __DIR__ . '/process_page/manage_main_cate/view.php';
                     }
                     elseif ($_GET['action'] == 'create') {
-                        include_once __DIR__ . '/process_page/folders/create.php';
+                        include_once __DIR__ . '/process_page/manage_main_cate/create.php';
                     }
                     elseif ($_GET['action'] == 'insert') {
-                        include_once __DIR__ . '/process_page/folders/insert.php';
+                        include_once __DIR__ . '/process_page/manage_main_cate/insert.php';
                     }
                     elseif ($_GET['action'] == 'edit') {
                         // id
-                        include_once __DIR__ . '/process_page/folders/edit.php';
+                        include_once __DIR__ . '/process_page/manage_main_cate/edit.php';
                     }
                     elseif ($_GET['action'] == 'update') {
                         // id
-                        include_once __DIR__ . '/process_page/folders/update.php';
+                        include_once __DIR__ . '/process_page/manage_main_cate/update.php';
                     }
                     elseif ($_GET['action'] == 'delete') {
                         // id
-                        include_once __DIR__ . '/process_page/folders/delete.php';
+                        include_once __DIR__ . '/process_page/manage_main_cate/delete.php';
 
                     } else {
-                        echo '<script>window.location.href = "folders.php"</script>';
+                        echo '<script>window.location.href = "manage_main_cate.php"</script>';
                     }
                 } else {
                     // show all
-                    include_once __DIR__ . '/process_page/folders/show-all.php';
+                    include_once __DIR__ . '/process_page/manage_main_cate/show-all.php';
                 }
                 ?>
             </div>

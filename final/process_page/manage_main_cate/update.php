@@ -28,5 +28,5 @@ if (isset($_POST['submit'])) {
 
     $conn = null;
 
-    echo '<script>setTimeout(function(){window.location.href = "folders.php"}, 1000)</script>';
+    echo '<script>setTimeout(function(){window.location.href = "manage_main_cate.php"}, 1000)</script>';
 }

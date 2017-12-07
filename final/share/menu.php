@@ -25,7 +25,7 @@
             <li class="treeview <?=active_page_arr($txt['menu_admin']['sub_file'])?>">
                 <a href="#"><i class="fa fa-th-list"></i><span><?=$txt['menu_admin']['name']?></span><i class="fa fa-angle-right"></i></a>
                 <ul class="treeview-menu">
-                    <?php if(count($txt['menu_admin']['sub_menu']) > 0 && isset($_SESSION['user'])) { ?>
+                    <?php if(count($txt['menu_admin']['sub_menu']) > 0 && isset($_SESSION['user']) && $_SESSION['user']['permission'] == 1) { ?>
 
                         <?php for($i = 0; $i < count($txt['menu_admin']['sub_menu']); $i++) { ?>
                             <li><a href="<?=url($txt['menu_admin']['sub_file'][$i]) ?>"><i class="fa fa-circle-o"></i> <?=$txt['menu_admin']['sub_menu'][$i] ?></a></li>
