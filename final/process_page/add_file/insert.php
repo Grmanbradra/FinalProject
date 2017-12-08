@@ -30,6 +30,7 @@ if (isset($_POST['submit'])) {
         if($stmt->execute()) {
             // success
             echo "<script>swal('Success!', 'New record created successfully', 'success')</script>";
+            echo '<script>setTimeout(function(){window.location.href = "confirm_form.php"}, 1000)</script>';
 //            $_SESSION['notification']['success'] = "New record created successfully";
         } else {
             // fail

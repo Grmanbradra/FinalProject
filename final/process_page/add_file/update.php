@@ -2,13 +2,12 @@
 
 if (isset($_POST['submit'])) {
 
-
     try {
-        $stmt = $conn->prepare("UPDATE categories_water SET water_id = :id, water_name = :name, water_range = :range WHERE water_id = :id_old");
-        $stmt->bindValue(':id_old', $id);
-        $stmt->bindValue(':id', $_POST['water_id']);
-        $stmt->bindValue(':name', $_POST['water_name']);
-        $stmt->bindValue(':range', $_POST['water_rang']);
+        $stmt = $conn->prepare("INSERT INTO ref_file(id_ref_cate, id_degree, id_user) 
+                VALUES (:id_ref_cate, :id_degree, :id_user)");
+        $stmt->bindValue(':id_ref_cate', $_POST['water_id']);
+        $stmt->bindValue(':id_degree', $_POST['water_name']);
+        $stmt->bindValue(':id_user', $_POST['water_rang']);
         if($stmt->execute()) {
             // success
             echo "<script>swal('Success!', 'Update record successfully', 'success')</script>";
@@ -18,6 +17,7 @@ if (isset($_POST['submit'])) {
 //            $_SESSION['notification']['warning'] = "Insert Fail!";
             echo "<script>swal('Warning!', 'Update Fail!', 'warning')</script>";
         }
+
     }
     catch(PDOException $e)
     {

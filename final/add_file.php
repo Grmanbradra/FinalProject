@@ -58,14 +58,18 @@ require_once __DIR__ . '/autoload_admin.php';
                 </div>
 
                 <?php
-
                 if (isset($_GET['action'])) {
                     $id = isset($_GET['id']) ? $_GET['id'] : null;
+
                     if ($_GET['action'] == 'form_add') {
                         include_once __DIR__ . '/process_page/add_file/form_add.php';
                     }
                     elseif ($_GET['action'] == 'insert') {
                         include_once __DIR__ . '/process_page/add_file/insert.php';
+                    }
+                    elseif ($_GET['action'] == 'confirm') {
+                        // id
+                        include_once __DIR__ . '/process_page/add_file/confirm_form.php';
                     }
                     elseif ($_GET['action'] == 'update') {
                         // id

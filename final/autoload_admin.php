@@ -10,6 +10,8 @@ require_once __DIR__ . '/share/notifications.php';
 
 require_once __DIR__ . '/common/menu.php';
 
+require_once __DIR__ . '/process/WebAPI.php';
+
 
 
 function base_file($path = '') {
