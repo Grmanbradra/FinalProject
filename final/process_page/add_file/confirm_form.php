@@ -15,6 +15,14 @@ try {
 //    var_dump($api->process());
     $webApi = ($api->process());
 
+    if(!isset($webApi['id_degree'])) {
+        $webApi['id_degree'] = '';
+    }
+
+    if(!isset($webApi['id_ref_cate'])) {
+        $webApi['id_ref_cate'] = '';
+    }
+
     $stmt = $conn->prepare("SELECT * FROM degree WHERE id_degree=:id");
     $stmt->bindValue(":id", $webApi['id_degree']);
     $stmt->execute();
@@ -45,15 +53,23 @@ try {
                 <td width="250">หมวดหมู่</td>
                 <td>
                     <input type="hidden" name="id_ref_cate_old" value="<?=$webApi['id_ref_cate']?>">
-                    <input type="text" disabled name="category"
-                           value="<?=$category_sub['digit_main'].'-'.$category_sub['name_main'].'  ('.$category_sub['digit_sub'].'-'.$category_sub['name_sub'].')' ?>" style="width: 100%">
+                    <?php
+                        if($category_sub['digit_main'] == '' || $category_sub['name_main'] == '' || $category_sub['digit_sub'] == '' || $category_sub['name_sub'] == '') {
+                            echo "<input type='text' disabled value='ไม่พบข้อมูล' name='category' style='width: 100%'>";
+                        } else {
+                    ?>
+                        <input type="text" disabled name="category"
+                               value="<?=$category_sub['digit_main'].'-'.$category_sub['name_main'].'  ('.$category_sub['digit_sub'].'-'.$category_sub['name_sub'].')' ?>" style="width: 100%">
+                    <?php
+                        }
+                    ?>
                 </td>
             </tr>
             <tr>
                 <td width="250">ระดับความเชี่ยวชาญ</td>
                 <td>
                     <input type="hidden" name="id_degree_old" value="<?=$webApi['id_degree']?>">
-                    <input type="text" disabled name="name_degree" value="<?=$degree['name_degree'] ?>" style="width: 100%">
+                    <input type="text" disabled name="name_degree" value="<?=$degree['name_degree'] != '' ?: 'ไม่พบข้อมูล' ?>" style="width: 100%">
 
                 </td>
             </tr>
