@@ -50,11 +50,11 @@ require_once __DIR__ . '/autoload_admin.php';
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div class="text-right">
-                    <a class="btn btn-primary btn-lg" href="<?=url('folders.php?action=create') ?>">เพิ่มข้อมูล</a>
-                    <br>
-                    <br>
-                </div>
+<!--                <div class="text-right">-->
+<!--                    <a class="btn btn-primary btn-lg" href="--><?//=url('folders.php?action=create') ?><!--">เพิ่มข้อมูล</a>-->
+<!--                    <br>-->
+<!--                    <br>-->
+<!--                </div>-->
 
                 <?php
 
@@ -64,12 +64,12 @@ require_once __DIR__ . '/autoload_admin.php';
                         // id
                         include_once __DIR__ . '/process_page/folders/view.php';
                     }
-                    elseif ($_GET['action'] == 'create') {
-                        include_once __DIR__ . '/process_page/folders/create.php';
-                    }
-                    elseif ($_GET['action'] == 'insert') {
-                        include_once __DIR__ . '/process_page/folders/insert.php';
-                    }
+//                    elseif ($_GET['action'] == 'create') {
+//                        include_once __DIR__ . '/process_page/folders/create.php';
+//                    }
+//                    elseif ($_GET['action'] == 'insert') {
+//                        include_once __DIR__ . '/process_page/folders/insert.php';
+//                    }
                     elseif ($_GET['action'] == 'edit') {
                         // id
                         include_once __DIR__ . '/process_page/folders/edit.php';

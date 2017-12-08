@@ -1,7 +1,7 @@
 <?php
 // read data
 try {
-    $sql = "SELECT f.name_file, f.author_file, f.year_file, main.name_main, sub.name_sub, deg.name_degree
+    $sql = "SELECT f.id_file, f.name_file, f.author_file, f.year_file, main.name_main, sub.name_sub, deg.name_degree
             FROM file_data AS f 
             JOIN ref_file ref ON f.id_file=ref.id_file
             JOIN degree deg ON ref.id_degree=deg.id_degree
@@ -50,13 +50,13 @@ $conn = null;
                     <td><?=$val['name_degree'] ?></td>
                     <td>
                         <a class="btn btn-info"
-                           href="<?= url('folders.php?action=view&id=' . $val['water_id']) ?>"><i
+                           href="<?= url('folders.php?action=view&id=' . $val['id_file']) ?>"><i
                                 class="fa fa-eye" aria-hidden="true"></i></a>
                         <a class="btn btn-warning"
-                           href="<?= url('folders.php?action=edit&id=' . $val['water_id']) ?>"><i
+                           href="<?= url('folders.php?action=edit&id=' . $val['id_file']) ?>"><i
                                 class="fa fa-edit" aria-hidden="true"></i></a>
                         <a class="btn btn-danger" onclick="confirmDelete(this, event)"
-                           href="<?= url('folders.php?action=delete&id=' . $val['water_id']) ?>"><i
+                           href="<?= url('folders.php?action=delete&id=' . $val['id_file']) ?>"><i
                                 class="fa fa-remove" aria-hidden="true"></i></a>
                     </td>
                 </tr>

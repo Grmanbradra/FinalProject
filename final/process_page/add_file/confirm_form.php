@@ -69,7 +69,7 @@ try {
                 <td width="250">ระดับความเชี่ยวชาญ</td>
                 <td>
                     <input type="hidden" name="id_degree_old" value="<?=$webApi['id_degree']?>">
-                    <input type="text" disabled name="name_degree" value="<?=$degree['name_degree'] != '' ?: 'ไม่พบข้อมูล' ?>" style="width: 100%">
+                    <input type="text" disabled name="name_degree" value="<?=$degree['name_degree'] != '' ?$degree['name_degree']: 'ไม่พบข้อมูล' ?>" style="width: 100%">
 
                 </td>
             </tr>
