@@ -28,34 +28,32 @@ class WebAPI
 
     public function process() {
         $this->cut_word();
+        $this->toLower();
+//print_r($this->words);
 
-print_r($this->words);
+        $this->findKeyDegree($this->words);
+        $this->findKeySubCate($this->words);
 
-        foreach ($this->words as $word) {
-            $this->findKeyDegree($word);
-            $this->findKeySubCate($word);
-        }
-
-        print_r($this->scoreDegree);
-        print_r($this->scoreSubCate);
+//        print_r($this->scoreDegree);
+//        print_r($this->scoreSubCate);
 
         if(count($this->scoreDegree) > 0) {
-            print_r("score degree > 0");
+//            print_r("score degree > 0");
             $this->output['id_degree'] = $this->findMoreDegree();
         } else {
             // default
-            print_r("score degree not value");
+//            print_r("score degree not value");
         }
 
-        if(count($this->scoreSubCate) > 1) {
-            print_r("score sub cate > 1");
+        if(count($this->scoreSubCate) > 0) {
+//            print_r("score sub cate > 0<br>");
             $this->output['id_ref_cate'] = $this->findMoreSubCate();
         } else {
             // default
-            print_r("score sub cate not value");
+//            print_r("score sub cate not value<br>");
         }
 
-//        return $this->scoreSubCate;
+        return $this->output;
     }
 
     private function findKeyDegree($keyword) {
@@ -63,11 +61,15 @@ print_r($this->words);
 
         // update value
         if($key_degree !== false) {
-            print_r($key_degree);
-            if(isset($this->scoreDegree[$key_degree['id_degree']])) {
-                $this->scoreDegree[$key_degree['id_degree']] += 1;
-            } else {
-                $this->scoreDegree[$key_degree['id_degree']] = 1;
+//            print_r($key_degree);
+            if(count($key_degree) > 0) {
+                foreach ($key_degree as $value) {
+                    if(isset($this->scoreDegree[$value['id_degree']])) {
+                        $this->scoreDegree[$value['id_degree']] += 1;
+                    } else {
+                        $this->scoreDegree[$value['id_degree']] = 1;
+                    }
+                }
             }
         }
 
@@ -78,8 +80,18 @@ print_r($this->words);
 
         // update value
         if($key_category !== false) {
-            print_r($key_category);
-            $this->scoreSubCate[] = $key_category;
+//            print_r($key_category);
+            if(count($key_category) > 0) {
+                foreach ($key_category as $value) {
+                    $this->scoreSubCate[] = $value;
+//                    if(isset($this->scoreDegree[$value['id_degree']])) {
+//                        $this->scoreDegree[$value['id_degree']] += 1;
+//                    } else {
+//                        $this->scoreDegree[$value['id_degree']] = 1;
+//                    }
+                }
+            }
+
 //            if(isset($this->scoreSubCate[$key_category['digit_sub']])) {
 //                $this->scoreSubCate[$key_category['digit_sub']] += 1;
 //            } else {
@@ -111,22 +123,20 @@ print_r($this->words);
     }
 
     private function key_degree($keyword) {
-        $sql = "select id_degree, keyword_degree from key_degree WHERE LOWER(keyword_degree)=:word";
+        $sql = "select id_degree, keyword_degree from key_degree WHERE LOWER(keyword_degree) in(" . $this->arrToString($keyword) . ")";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bindValue(':word', strtolower($keyword));
         $stmt->execute();
-        return $stmt->fetch();
+        return $stmt->fetchAll();
     }
 
     private function key_category($keyword) {
         $sql = "SELECT * 
                 FROM key_category
                 JOIN ref_category category ON key_category.id_key = category.id_key 
-                WHERE LOWER(keyword)=:word";
+                WHERE LOWER(keyword) in(". $this->arrToString($keyword).")";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bindValue(':word', strtolower($keyword));
         $stmt->execute();
-        return $stmt->fetch();
+        return $stmt->fetchAll();
     }
 
     private function findMoreDegree() {
@@ -138,18 +148,59 @@ print_r($this->words);
                 $current = $value;
             }
         }
+
+
         return $id;
     }
 
     private function findMoreSubCate() {
         $current = 0;
         $id = 0;
+        $digit_sub = [];
         foreach ($this->scoreSubCate as $key => $value) {
-            if($current < $value) {
+            if(isset($digit_sub[$value['digit_sub']]['count'])) {
+                $digit_sub[$value['digit_sub']]['count'] += 1;
+            } else {
+                $digit_sub[$value['digit_sub']]['count'] = 1;
+            }
+            $digit_sub[$value['digit_sub']]['id_ref_cate'] = $value['id_ref_cate'];
+        }
+
+        foreach ($digit_sub as $key => $value) {
+            if($current < $value['count']) {
                 $id = $key;
-                $current = $value;
+                $current = $value['count'];
             }
         }
-        return $id;
+
+//        print_r($digit_sub[$id]['count'] . "<br>");
+        if(count($digit_sub[$id]['count']) == 0) {
+            // default
+            return '1';
+        }
+
+        return $digit_sub[$id]['id_ref_cate'];
     }
+
+    private function toLower()
+    {
+        $arr = [];
+        foreach ($this->words as $word) {
+            $arr[] = strtolower($word);
+        }
+        $this->words = $arr;
+    }
+
+    private function arrToString($arr) {
+        $str = "";
+        for($i = 0; $i < count($arr); $i++) {
+            if($i != 0) {
+                $str .= ",";
+            }
+            $str .= "'$arr[$i]'";
+
+        }
+        return $str;
+    }
+
 }
