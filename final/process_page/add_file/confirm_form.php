@@ -15,6 +15,14 @@ try {
 //    var_dump($api->process());
     $webApi = ($api->process());
 
+    if(!isset($webApi['id_degree'])) {
+        $webApi['id_degree'] = '';
+    }
+
+    if(!isset($webApi['id_ref_cate'])) {
+        $webApi['id_ref_cate'] = '';
+    }
+
     $stmt = $conn->prepare("SELECT * FROM degree WHERE id_degree=:id");
     $stmt->bindValue(":id", $webApi['id_degree']);
     $stmt->execute();
@@ -34,7 +42,7 @@ try {
     echo "Error: " . $e->getMessage();
     $data = null;
 }
-$conn = null;
+
 ?>
 <div class="card">
     <h3 class="card-title">ยืนยันการจัดหมวดหมู่</h3>
@@ -44,14 +52,24 @@ $conn = null;
             <tr>
                 <td width="250">หมวดหมู่</td>
                 <td>
-                    <input type="text" disabled name="sub_id"
-                           value="<?=$category_sub['digit_main'].'-'.$category_sub['name_main'].'  ('.$category_sub['digit_sub'].'-'.$category_sub['name_sub'].')' ?>" style="width: 100%">
+                    <input type="hidden" name="id_ref_cate_old" value="<?=$webApi['id_ref_cate']?>">
+                    <?php
+                        if($category_sub['digit_main'] == '' || $category_sub['name_main'] == '' || $category_sub['digit_sub'] == '' || $category_sub['name_sub'] == '') {
+                            echo "<input type='text' disabled value='ไม่พบข้อมูล' name='category' style='width: 100%'>";
+                        } else {
+                    ?>
+                        <input type="text" disabled name="category"
+                               value="<?=$category_sub['digit_main'].'-'.$category_sub['name_main'].'  ('.$category_sub['digit_sub'].'-'.$category_sub['name_sub'].')' ?>" style="width: 100%">
+                    <?php
+                        }
+                    ?>
                 </td>
             </tr>
             <tr>
                 <td width="250">ระดับความเชี่ยวชาญ</td>
                 <td>
-                    <input type="text" disabled name="water_name" value="<?=$degree['name_degree'] ?>" style="width: 100%">
+                    <input type="hidden" name="id_degree_old" value="<?=$webApi['id_degree']?>">
+                    <input type="text" disabled name="name_degree" value="<?=$degree['name_degree'] != '' ?: 'ไม่พบข้อมูล' ?>" style="width: 100%">
 
                 </td>
             </tr>
@@ -61,13 +79,41 @@ $conn = null;
             <tr>
                 <td width="250">หมวดหมู่</td>
                 <td>
-                    <input type="text" name="water_rang" style="width: 100%">
+                    <select name="id_ref_cate" id="id_ref_cate">
+                        <option value="">-- กรุณาใส่ข้อมูล --</option>
+                        <?php
+                        $sql = "select * 
+                                from ref_category rc 
+                                JOIN main_category mc ON rc.digit_main = mc.digit_main
+                                JOIN sub_category sc ON rc.digit_sub = sc.digit_sub
+                                ORDER BY mc.digit_main";
+                        $stmt = $conn->prepare($sql);
+                        $stmt->execute();
+                        $main = $stmt->fetchAll();
+                        foreach($main as $value) {
+                            echo '<option value="'.$value['id_ref_cate'].'"  '.($value["id_ref_cate"] == $category_sub["id_ref_cate"] ? 'selected' : '').'>'
+                                .$value['digit_main'] .' - '.$value['name_main'] .'( '. $value['digit_sub'] .' - '.$value['name_sub'] .')'.'</option>';
+                        }
+                        ?>
+                    </select>
                 </td>
             </tr>
             <tr>
                 <td width="250">ระดับความเชี่ยวชาญ</td>
                 <td>
-                    <input type="text" name="water_rang" style="width: 100%">
+                    <select name="id_degree" id="id_degree">
+                        <option value="">-- กรุณาใส่ข้อมูล --</option>
+                        <?php
+                        $sql = "select * from degree";
+                        $stmt = $conn->prepare($sql);
+                        $stmt->execute();
+                        $main = $stmt->fetchAll();
+                        foreach($main as $value) {
+                            echo '<option value="'.$value['id_degree'].'"  '.($value["id_degree"] == $degree["id_degree"] ? 'selected' : '').'>'
+                                .$value['id_degree'] .' - '.$value['name_degree'] .'</option>';
+                        }
+                        ?>
+                    </select>
                 </td>
             </tr>
             </tbody>
@@ -79,3 +125,4 @@ $conn = null;
     <a href="<?= url('add_file.php');?>" class="btn btn-success">ย้อนกลับ</a>
 </div>
 
+<?php $conn = null; ?>
