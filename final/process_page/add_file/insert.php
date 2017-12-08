@@ -7,7 +7,7 @@ if (isset($_POST['submit'])) {
         // upload file
         $path = "";
         if(isset($_FILES['book_file'])) {
-            $target_dir = "box/others/";
+            $target_dir = "box/Others/";
             $name = basename($_FILES["book_file"]["name"]);
             $target_file = __DIR__."/../../" . $target_dir . $name;
 
