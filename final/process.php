@@ -1,5 +1,5 @@
 <?php
-
+require_once __DIR__.'/autoload_admin.php';
 $name_book = $_POST["name_book"];
 //    $name_file = $_POST["fileData"];
 
@@ -28,8 +28,14 @@ function cut_word(string $word)
 
 function process(array $word)
 {
+    $sql = "SELECT keyword_degree FROM key_degree WHERE id_degree = 1";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $data = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
     //area keyword
-    $degree_basic = array("Foundational", "Foundations", "Basic", "Introduction", "Basis");
+    $degree_basic = $data;
+//    $degree_basic = array("Foundational", "Foundations", "Basic", "Introduction", "Basis");
     $degree_middle = array("moderate", "medium", "middle");
     $degree_expert = array("high", "maximum", "optimum");
 
@@ -165,6 +171,8 @@ function process(array $word)
     if ($score_001 < $score_021 or $score_002 < $score_021 or $score_003 < $score_021 or $score_011 < $score_021
     or $score_012 < $score_021){
         echo "021";
+    }else{
+        echo "Other";
     }
     return $score_basic;
 }

@@ -7,9 +7,11 @@ try {
             JOIN degree deg ON ref.id_degree=deg.id_degree
             JOIN ref_category rec ON ref.id_ref_cate=rec.id_ref_cate
             JOIN main_category main ON main.digit_main=rec.digit_main
-            JOIN sub_category sub ON sub.digit_sub=rec.digit_sub";
+            JOIN sub_category sub ON sub.digit_sub=rec.digit_sub
+            WHERE ref.id_user = :user_id";
 
     $stmt = $conn->prepare($sql);
+    $stmt->bindValue(':user_id', $_SESSION['user']['id']);
     $stmt->execute();
 
     $data = $stmt->fetchAll();
