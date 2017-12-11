@@ -86,6 +86,7 @@ try {
                                 from ref_category rc 
                                 JOIN main_category mc ON rc.digit_main = mc.digit_main
                                 JOIN sub_category sc ON rc.digit_sub = sc.digit_sub
+                                GROUP BY sc.digit_sub
                                 ORDER BY mc.digit_main";
                         $stmt = $conn->prepare($sql);
                         $stmt->execute();

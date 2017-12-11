@@ -54,7 +54,10 @@ $conn = null;
             <td colspan="2" style="text-align: center">
                 <h3>Preview PDF</h3>
 
-                <p> ... . . . file  ..... . . </p>
+                <div class="text-center">
+                    <a href="print_pdf.php?id=<?=$id;?>" target="_blank" class="btn btn-info">ดูเอกสาร</a>
+                </div>
+<!--                <p> ... . . . file  ..... . . </p>-->
             </td>
         </tr>
         </tbody>

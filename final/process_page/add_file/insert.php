@@ -1,6 +1,10 @@
 <?php
 
+//echo '<pre>';
+//var_dump($_POST);
+//exit;
 if (isset($_POST['submit'])) {
+
 
     try {
 
@@ -8,8 +12,13 @@ if (isset($_POST['submit'])) {
         $path = "";
         if(isset($_FILES['book_file'])) {
             $target_dir = "box/Others/";
+
+            if(!file_exists(dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . $target_dir)) {
+                mkdir(dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . $target_dir, 0777, true);
+            }
+
             $name = basename($_FILES["book_file"]["name"]);
-            $target_file = __DIR__."/../../" . $target_dir . $name;
+            $target_file = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . $target_dir . $name;
 
             $fileType = pathinfo($target_file,PATHINFO_EXTENSION);
 
@@ -21,7 +30,7 @@ if (isset($_POST['submit'])) {
             }
 
         }
-
+//exit;
         $stmt = $conn->prepare("INSERT INTO file_data (name_file, author_file, year_file, path_file) VALUES (:name, :author, :year, :path)");
         $stmt->bindValue(':name', $_POST['book_name']);
         $stmt->bindValue(':author', $_POST['book_author']);
@@ -49,3 +58,5 @@ if (isset($_POST['submit'])) {
         echo '<script>setTimeout(function(){window.location.href = "add_file.php"}, 1000)</script>';
     }
 }
+//exit;
+//echo '<script>setTimeout(function(){window.location.href = "add_file.php"}, 1000)</script>';

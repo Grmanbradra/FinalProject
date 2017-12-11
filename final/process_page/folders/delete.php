@@ -12,13 +12,13 @@ try {
 
         $directory = dirname(dirname(__DIR__)) . '/'. $data['path_file'];
 
-        echo '<pre>';
-        echo $directory . "<br>";
+//        echo '<pre>';
+//        echo $directory . "<br>";
 
         if(file_exists($directory)) {
-            echo 'file_exists';
+//            echo 'file_exists';
             if(unlink($directory)) {
-                echo 'remove file success';
+//                echo 'remove file success';
                 $check = true;
             }
         } else {

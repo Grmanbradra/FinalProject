@@ -3,11 +3,11 @@
 try {
     $sql = "SELECT f.id_file, f.name_file, f.author_file, f.year_file, main.name_main, sub.name_sub, deg.name_degree
             FROM file_data AS f 
-            JOIN ref_file ref ON f.id_file=ref.id_file
-            JOIN degree deg ON ref.id_degree=deg.id_degree
-            JOIN ref_category rec ON ref.id_ref_cate=rec.id_ref_cate
-            JOIN main_category main ON main.digit_main=rec.digit_main
-            JOIN sub_category sub ON sub.digit_sub=rec.digit_sub
+            LEFT JOIN ref_file ref ON f.id_file=ref.id_file
+            LEFT JOIN degree deg ON ref.id_degree=deg.id_degree
+            LEFT JOIN ref_category rec ON ref.id_ref_cate=rec.id_ref_cate
+            LEFT JOIN main_category main ON main.digit_main=rec.digit_main
+            LEFT JOIN sub_category sub ON sub.digit_sub=rec.digit_sub
             WHERE ref.id_user = :user_id";
 
     $stmt = $conn->prepare($sql);
